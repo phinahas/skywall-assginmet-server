@@ -26,10 +26,21 @@ router.get('/movies-2010',(req,res)=>{
 })
 
 router.get('/movies-rating-8.0',(req,res)=>{
+    
     movieHelpers.getMoviesRating().then((response)=>{
         res.status(200).json({success:"true",data:response})
     })
 
+})
+
+router.post('/movies-cast-search',(req,res)=>{
+
+    movieHelpers.getMovieWithActors(req.body).then((response)=>{
+        res.status(200).json({success:"true",data:response})
+    }).catch((error)=>{
+        
+        res.status(404).json({error:error})
+    })
 })
 
 

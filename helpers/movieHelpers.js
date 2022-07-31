@@ -47,5 +47,19 @@ module.exports = {
       resolve(movies);
 
     })
+  },
+
+  getMovieWithActors : (actors)=>{
+    return new Promise(async (resolve, reject)=>{
+
+      let movies = await db.get().collection(collection.MOVIES).find({cast:{$all:[actors.actor1,actors.actor2]}}).toArray();
+      //console.log(movies);
+      if(movies.length===0){
+        reject("No moives found in our database")
+      }else{
+        resolve(movies);
+      }
+
+    })
   }
 };
