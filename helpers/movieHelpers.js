@@ -1,8 +1,18 @@
 const db = require("../config/connection");
 const collection = require("../config/collections");
 const objectId = require("mongodb").ObjectID;
+const jwt = require("jsonwebtoken");
+const tokenSecret = require("../tokenSecret");
+const token = jwt.sign({id:"phinahas"},tokenSecret.tokenSecret);
 
 module.exports = {
+
+  getToken:()=>{
+    return new Promise(async (resolve, reject) => {
+      resolve({token:token})
+    })
+  },
+
   createMovie: (movie) => {
     return new Promise((resolve, reject) => {
       db.get()
